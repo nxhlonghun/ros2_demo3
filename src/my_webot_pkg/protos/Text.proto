@@ -1,0 +1,175 @@
+#VRML_SIM R2025a utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# This is a proto file for Webots for the Text
+# Extracted from: /home/nxh/ros2_demo2/src/my_webot_pkg/urdf/text.urdf
+
+PROTO Text [
+  field  SFVec3f     translation     0 0 0
+  field  SFRotation  rotation        0 0 1 0
+  field  SFString    name            "Text"  # Is `Robot.name`.
+  field  SFString    controller      "void"  # Is `Robot.controller`.
+  field  MFString    controllerArgs  []      # Is `Robot.controllerArgs`.
+  field  SFString    customData      ""      # Is `Robot.customData`.
+  field  SFBool      supervisor      FALSE   # Is `Robot.supervisor`.
+  field  SFBool      synchronization TRUE    # Is `Robot.synchronization`.
+  field  SFBool      selfCollision   FALSE   # Is `Robot.selfCollision`.
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    controller IS controller
+    controllerArgs IS controllerArgs
+    customData IS customData
+    supervisor IS supervisor
+    synchronization IS synchronization
+    selfCollision IS selfCollision
+    children [
+      Shape {
+        appearance DEF base_link_material PBRAppearance {
+          roughness 1.000000
+          metalness 0
+        }
+        geometry DEF base_link Mesh {
+          url "../meshes/base_link.STL"
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000000 -0.000004 1.000000
+          anchor 0.000000 0.000000 0.240620
+        }
+        device [
+          RotationalMotor {
+            name "middle_joint"
+            maxTorque 10000
+          }
+          PositionSensor {
+            name "middle_joint_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.000000 0.000000 0.240620
+          rotation 1.000000 0.000000 0.000000 1.570800
+          children [
+            Shape {
+              appearance DEF middle_Link_material PBRAppearance {
+                baseColor 0.866670 0.909800 1.000000
+                roughness 1.000000
+                metalness 0
+              }
+              geometry DEF middle_Link Mesh {
+                url "../meshes/middle_Link.STL"
+              }
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis 0.000000 1.000000 -0.000000
+                anchor 0.225000 0.045379 0.000000
+              }
+              device [
+                RotationalMotor {
+                  name "arm_joint"
+                  maxTorque 10000
+                }
+                PositionSensor {
+                  name "arm_joint_sensor"
+                }
+              ]
+              endPoint Solid {
+                translation 0.225000 0.045379 0.000000
+                rotation -1.000000 0.000000 0.000000 1.570796
+                children [
+                  Shape {
+                    appearance DEF arm_Link_material PBRAppearance {
+                      baseColor 0.866670 0.909800 1.000000
+                      roughness 1.000000
+                      metalness 0
+                    }
+                    geometry DEF arm_Link Mesh {
+                      url "../meshes/arm_Link.STL"
+                    }
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      axis 0.000000 0.000000 1.000000
+                      anchor 0.186000 0.000000 0.011500
+                    }
+                    device [
+                      RotationalMotor {
+                        name "hand_joint"
+                        maxTorque 10000
+                      }
+                      PositionSensor {
+                        name "hand_joint_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0.186000 0.000000 0.011500
+                      children [
+                        Shape {
+                          appearance DEF hand_Link_material PBRAppearance {
+                            roughness 1.000000
+                            metalness 0
+                          }
+                          geometry DEF hand_Link Mesh {
+                            url "../meshes/hand_Link.STL"
+                          }
+                        }
+                      ]
+                      name "hand_Link"
+                      boundingObject USE hand_Link
+                      physics Physics {
+                        density -1
+                        mass 0.155630
+                        centerOfMass [ -0.000108 -0.000032 0.038796 ]
+                        inertiaMatrix [
+                          3.377800e-04 3.376100e-04 4.186100e-05
+                          6.044400e-08 4.306600e-11 -5.536600e-11
+                        ]
+                      }
+                    }
+                  }
+                ]
+                name "arm_Link"
+                boundingObject USE arm_Link
+                physics Physics {
+                  density -1
+                  mass 1.713000
+                  centerOfMass [ 0.063460 0.000379 0.055012 ]
+                  inertiaMatrix [
+                    2.835500e-03 7.599000e-03 7.959600e-03
+                    1.485900e-05 -1.174000e-04 -1.565600e-06
+                  ]
+                }
+              }
+            }
+          ]
+          name "middle_Link"
+          boundingObject USE middle_Link
+          physics Physics {
+            density -1
+            mass 2.045600
+            centerOfMass [ 0.093871 0.025593 0.000000 ]
+            inertiaMatrix [
+              2.606600e-03 1.819700e-02 1.596600e-02
+              4.360300e-04 -2.044800e-08 -2.042400e-09
+            ]
+          }
+        }
+      }
+    ]
+    name IS name
+    boundingObject USE base_link
+    physics Physics {
+      density -1
+      mass 2.512100
+      centerOfMass [ -0.025029 0.000076 0.117100 ]
+      inertiaMatrix [
+        1.027800e-02 1.007200e-02 9.209400e-03
+        1.057800e-09 -7.853400e-05 5.549000e-10
+      ]
+    }
+  }
+}

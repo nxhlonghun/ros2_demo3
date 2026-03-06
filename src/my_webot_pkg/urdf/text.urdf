@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="text">
+  <link name="world"/>
+    <joint name="fixed_base_to_world" type="fixed">
+      <parent link="world"/>
+      <child link="base_link"/> <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.025029 7.5976E-05 0.1171" rpy="0 0 0" />
+      <mass value="2.5121" />
+      <inertia ixx="0.010278" ixy="1.0578E-09" ixz="-7.8534E-05" iyy="0.010072" iyz="5.549E-10" izz="0.0092094" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://my_webot_pkg/meshes/base_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://my_webot_pkg/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="middle_Link">
+    <inertial>
+      <origin xyz="0.093871 0.025593 2.3414E-07" rpy="0 0 0" />
+      <mass value="2.0456" />
+      <inertia ixx="0.0026066" ixy="0.00043603" ixz="-2.0448E-08" iyy="0.018197" iyz="-2.0424E-09" izz="0.015966" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://my_webot_pkg/meshes/middle_Link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.86667 0.9098 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://my_webot_pkg/meshes/middle_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="middle_joint" type="continuous">
+    <origin xyz="0 0 0.24062" rpy="1.5708 0 0" />
+    <parent link="base_link" />
+    <child link="middle_Link" />
+    <axis xyz="0 1 0" />
+  </joint>
+  <link name="arm_Link">
+    <inertial>
+      <origin xyz="0.06346 0.00037889 0.055012" rpy="0 0 0" />
+      <mass value="1.713" />
+      <inertia ixx="0.0028355" ixy="1.4859E-05" ixz="-0.0001174" iyy="0.007599" iyz="-1.5656E-06" izz="0.0079596" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://my_webot_pkg/meshes/arm_Link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.86667 0.9098 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://my_webot_pkg/meshes/arm_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="arm_joint" type="continuous">
+    <origin xyz="0.225 0.0453789999999815 0" rpy="-1.5707963267949 0 0" />
+    <parent link="middle_Link" />
+    <child link="arm_Link" />
+    <axis xyz="0 0 1" />
+  </joint>
+  <link name="hand_Link">
+    <inertial>
+      <origin xyz="-0.00010759 -3.1671E-05 0.038796" rpy="0 0 0" />
+      <mass value="0.15563" />
+      <inertia ixx="0.00033778" ixy="6.0444E-08" ixz="4.3066E-11" iyy="0.00033761" iyz="-5.5366E-11" izz="4.1861E-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://my_webot_pkg/meshes/hand_Link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://my_webot_pkg/meshes/hand_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="hand_joint" type="continuous">
+    <origin xyz="0.185999999999999 0 0.0114999999999999" rpy="0 0 0" />
+    <parent link="arm_Link" />
+    <child link="hand_Link" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <ros2_control name="WebotsControlSystem" type="system">
+    <hardware>
+      <plugin>webots_ros2_control::Ros2ControlSystem</plugin>
+    </hardware>
+    <joint name="middle_joint">
+      <command_interface name="position" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+    <joint name="arm_joint">
+      <command_interface name="position" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+    <joint name="hand_joint">
+      <command_interface name="position" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+  </ros2_control>
+
+  <webots>
+    <plugin type="webots_ros2_control::Ros2Control" />
+  </webots>
+</robot>
