@@ -1,0 +1,34 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/nxh/ros2_demo1/install/wpr_simulation2/include/**",
+        "/home/nxh/ros2_demo1/install/wp_map_tools/include/**",
+        "/home/nxh/ros2_demo1/install/learning_interface/include/**",
+        "/home/nxh/ros2_demo1/install/demo_nav2_customplanner/include/**",
+        "/home/nxh/ros2_demo1/install/demo_motion_control/include/**",
+        "/home/nxh/ros2_demo1/install/demo_cpp_qt/include/**",
+        "/home/nxh/ros2_demo1/install/demo_interface/include/**",
+        "/home/nxh/ros2_demo2/install/webots_ros2_control/include/**",
+        "/home/nxh/ros2_demo2/install/webots_ros2_driver/include/**",
+        "/home/nxh/ros2_demo2/install/webots_ros2_msgs/include/**",
+        "/home/nxh/ros2_demo2/install/demo_interface/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/nxh/ros2_demo3/src/my_webot_pkg/include/**",
+        "/home/nxh/ros2_demo3/src/webots_ros2/webots_ros2_control/include/**",
+        "/home/nxh/ros2_demo3/src/webots_ros2/webots_ros2_driver/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ros2",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++17"
+    }
+  ],
+  "version": 4
+}
